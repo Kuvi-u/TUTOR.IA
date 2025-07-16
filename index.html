@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorIA - Tu asistente educativo personal</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Botón de cambio de tema (claro/oscuro) -->
+        <div class="theme-toggle">
+            <input type="checkbox" id="theme-switch" class="theme-switch">
+            <label for="theme-switch" class="theme-switch-label">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+                <span class="ball"></span>
+            </label>
+        </div>
+
+        <!-- Panel de Control de IA -->
+        <div class="control-panel" id="ai-control-panel">
+            <div class="control-panel-header">
+                <h3>Panel de Control de IA</h3>
+                <button class="close-panel" id="close-panel">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="control-panel-content">
+                <div class="control-group">
+                    <label for="voice-speed">Velocidad de voz:</label>
+                    <div class="range-container">
+                        <span>Lenta</span>
+                        <input type="range" id="voice-speed" min="0.5" max="2" step="0.1" value="1.3">
+                        <span>Rápida</span>
+                    </div>
+                    <div class="range-value" id="speed-value">1.3</div>
+                </div>
+                
+                <div class="control-group">
+                    <label for="voice-pitch">Tono de voz:</label>
+                    <div class="range-container">
+                        <span>Grave</span>
+                        <input type="range" id="voice-pitch" min="0.5" max="2" step="0.1" value="1.0">
+                        <span>Agudo</span>
+                    </div>
+                    <div class="range-value" id="pitch-value">1.0</div>
+                </div>
+                
+                <div class="control-group">
+                    <label for="vocabulary-level">Nivel de vocabulario:</label>
+                    <select id="vocabulary-level">
+                        <option value="basic">Básico</option>
+                        <option value="intermediate">Intermedio</option>
+                        <option value="advanced" selected>Avanzado</option>
+                    </select>
+                </div>
+                
+                <button id="save-settings" class="save-button">Guardar configuración</button>
+            </div>
+        </div>
+        
+        <!-- Botón para abrir panel de control -->
+        <div class="control-panel-toggle" id="control-panel-toggle">
+            <i class="fas fa-sliders-h"></i>
+            <span>Configurar IA</span>
+        </div>
+
+        <!-- Encabezado -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>TutorIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#materias">Materias</a></li>
+                    <li><a href="#">Ajustes</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+                <!-- Menú hamburguesa para móviles -->
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sección principal -->
+        <main>
+            <!-- Área de chat -->
+            <section class="chat-container">
+                <div class="chat-header">
+                    <h2>Conversación con TutorIA</h2>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Los mensajes se generarán dinámicamente con JavaScript -->
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            <p>¡Hola! Soy TutorIA, tu asistente educativo personal. ¿En qué puedo ayudarte hoy?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="typing-indicator" id="typing-indicator">
+                    <span>TutorIA está escribiendo</span>
+                    <div class="dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <form id="chat-form">
+                        <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." aria-label="Mensaje de usuario">
+                        <button type="submit" aria-label="Enviar mensaje">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Botón de voz flotante -->
+            <div class="voice-button" id="voice-button" aria-label="Activar reconocimiento de voz">
+                <i class="fas fa-microphone"></i>
+            </div>
+            <div class="voice-status" id="voice-status">Escuchando...</div>
+
+            <!-- Sección de materias -->
+            <section id="materias" class="subjects-section">
+                <h2>Materias disponibles</h2>
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <div class="subject-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>Idiomas</h3>
+                        <p>Inglés, Francés, Alemán, Español y más</p>
+                        <button class="subject-button">Comenzar</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Matemáticas</h3>
+                        <p>Álgebra, Cálculo, Geometría y Estadística</p>
+                        <button class="subject-button">Comenzar</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3>Física</h3>
+                        <p>Mecánica, Termodinámica, Electromagnetismo</p>
+                        <button class="subject-button">Comenzar</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Química</h3>
+                        <p>Química Orgánica, Inorgánica y Analítica</p>
+                        <button class="subject-button">Comenzar</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3>Biología</h3>
+                        <p>Genética, Ecología, Anatomía y Fisiología</p>
+                        <button class="subject-button">Comenzar</button>
+                    </div>
+                    <div class="subject-card">
+                        <div class="subject-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Literatura</h3>
+                        <p>Análisis literario, Escritura creativa</p>
+                        <button class="subject-button">Comenzar</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de página -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-robot"></i>
+                    <h2>TutorIA</h2>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="footer-text">
+                    <p>&copy; 2023 TutorIA. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
